@@ -1,70 +1,190 @@
-  var background = {}
-  
-  background.initializr = function (){
-    
-    var $this = this;
-     
+  (function() {
+    var lastTime = 0;
+    var vendors = ['ms', 'moz', 'webkit', 'o'];
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] 
+                                   || window[vendors[x]+'CancelRequestAnimationFrame'];
+    }
+ 
+    if (!window.requestAnimationFrame)
+        window.requestAnimationFrame = function(callback, element) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = window.setTimeout(function() { callback(currTime + timeToCall); }, 
+              timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+ 
+    if (!window.cancelAnimationFrame)
+        window.cancelAnimationFrame = function(id) {
+            clearTimeout(id);
+        };
+}());
 
-   
-    //option
-    $this.id = "background_css3";
-    $this.style = {bubbles_color:"#fff",stroke_width:0, stroke_color :"black"};
-    $this.bubbles_number = 30;
-    $this.speed = [1500,8000]; //milliseconds
-    $this.max_bubbles_height = $this.height;
-    $this.shape = false // 1 : circle | 2 : triangle | 3 : rect | false :random
-    
-    if($("#"+$this.id).lenght > 0){
-      $("#"+$this.id).remove();
+var Nodes = {
+
+  // Settings
+  density: 6,
+  reactionSensitivity: 3,
+
+  points: [],
+  lines: [[], []],
+  mouse: { x: -1000, y: -1000, down: false },
+
+  animation: null,
+
+  canvas: null,
+  context: null,
+
+  init: function() {
+    // Set up the visual canvas 
+    this.canvas = document.getElementById( 'stripes' );
+    this.context = this.canvas.getContext( '2d' );
+    this.context.lineJoin = 'bevel';
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = 300;
+    this.canvas.style.display = 'block'
+
+    this.canvas.addEventListener('mousemove', this.mouseMove, false);
+    this.canvas.addEventListener('mousedown', this.mouseDown, false);
+    this.canvas.addEventListener('mouseup',   this.mouseUp,   false);
+    this.canvas.addEventListener('mouseout',  this.mouseOut,  false);
+
+    window.onresize = function(event) {
+      Nodes.canvas.width = window.innerWidth;
+      Nodes.canvas.height = 300;
+      Nodes.onWindowResize();    
     }
-    $this.object = $("<div style='z-inde:-1;margin:0;padding:0; overflow:hidden;position:absolute;bottom:0' id='"+$this.id+"'> </div>'").appendTo("body");
+
+    this.preparePoints();
+    this.draw();
     
-    $this.ww = $(window).width()
-    $this.wh = $(window).height()
-    $this.width = $this.object.width($this.ww);
-    $this.height = $this.object.height($this.wh);
+  },
+
+  preparePoints: function() {
+
+    // Clear the current points
+    this.points = [];
+    this.lines = [[],[]];
     
-    
-    $("body").prepend("<style>.shape_background {transform-origin:center; width:80px; height:80px; background: "+$this.style.bubbles_color+"; position: absolute}</style>");
-    
-    
-    for (i = 0; i < $this.bubbles_number; i++) {
-        $this.generate_bubbles()
+    var width, height, i;
+    var center = 150;
+
+    for( i = -10; i < this.canvas.width + 10; i += this.density ) {
+
+      var line1 = {y: center - 17, originalY: center - 10, color: '#B1FB17'};
+      var line2 = {y: center - 17, originalY: center - 25, color: '#F52887'};
+
+      line1["x"] =  i;
+      line1["originalX"] = i;
+      
+      line2["x"] =  i;
+      line2["originalX"] = i;
+      
+      this.points.push(line1);
+      this.points.push(line2);
+      
+      this.lines[0].push(line1);
+      this.lines[1].push(line2);
     }
+  },
+
+  updatePoints: function() {
+
+    var i, currentPoint, theta, distance;
     
+    for (i = 0; i < this.points.length; i++ ){
+
+      currentPoint = this.points[i];
+
+      theta = Math.atan2( currentPoint.y - this.mouse.y, currentPoint.x - this.mouse.x);
+
+      if ( this.mouse.down ) {
+        distance = this.reactionSensitivity * 300 / Math.sqrt((this.mouse.x - currentPoint.x) * (this.mouse.x - currentPoint.x) +
+         (this.mouse.y - currentPoint.y) * (this.mouse.y - currentPoint.y));
+      } else {
+        distance = this.reactionSensitivity * 150 / Math.sqrt((this.mouse.x - currentPoint.x) * (this.mouse.x - currentPoint.x) +
+         (this.mouse.y - currentPoint.y) * (this.mouse.y - currentPoint.y));  
+      }
+      
+      currentPoint.x += Math.cos(theta) * distance + (currentPoint.originalX - currentPoint.x) * 0.07;
+      currentPoint.y += Math.sin(theta) * distance + (currentPoint.originalY - currentPoint.y) * 0.07;
+
+    }
+  },
+
+  drawPoints: function() {
+
+    var i, currentPoint;
+
+    for (i = 0; i < 2; i++) {
+      var line = this.lines[i];
+      this.context.beginPath();
+      this.context.lineJoin = 'round';
+      this.context.moveTo( line[0].x, line[0].y);
+      this.context.strokeStyle = line[0].color;
+      this.context.lineWidth = 10;
+      for (var j = 1; j < line.length - 2; j++) {
+        var point = line[j];
+
+        var xc = (point.x + line[j + 1].x) / 2;
+        var yc = (point.y + line[j + 1].y) / 2;
+
+        this.context.quadraticCurveTo(point.x, point.y, xc, yc);
+
+      }
+      this.context.stroke();
+      this.context.closePath();
+    }
+  },
+
+  draw: function() {
+    this.animation = requestAnimationFrame( function(){ Nodes.draw() } );
+
+    this.clear();
+    this.updatePoints();
+    this.drawPoints();
+
+  },
+
+  clear: function() {
+    this.canvas.width = this.canvas.width;
+  },
+
+  mouseDown: function( event ){
+    Nodes.mouse.down = true;
+  },
+
+  mouseUp: function( event ){
+    Nodes.mouse.down = false;
+  },
+  
+  mouseMove: function(event){
+    Nodes.mouse.x = event.pageX;
+    Nodes.mouse.y = event.pageY;
+  },
+  
+  mouseOut: function(event){
+    Nodes.mouse.x = -1000;
+    Nodes.mouse.y = -1000;
+    Nodes.mouse.down = false;
+  },
+
+  // Resize and redraw the canvas.
+  onWindowResize: function() {
+    cancelAnimationFrame( this.animation );
+    this.preparePoints();
+    this.draw();
   }
 
-  
-  
-  
+}
 
-   background.generate_bubbles = function() {
-     var $this = this;
-     var base = $("<div class='shape_background'></div>");
-     var shape_type = $this.shape ? $this.shape : Math.floor($this.rn(1,3));
-     if(shape_type == 1) {
-       var bolla = base.css({borderRadius: "50%"})
-     }else if (shape_type == 2){
-       var bolla = base.css({width:0, height:0, "border-style":"solid","border-width":"0 40px 69.3px 40px","border-color":"transparent transparent "+$this.style.bubbles_color+" transparent", background:"transparent"}); 
-     }else{
-       var bolla = base; 
-     }    
-     var rn_size = $this.rn(.8,1.2);
-     bolla.css({"transform":"scale("+rn_size+") rotate("+$this.rn(-360,360)+"deg)", top:$this.wh+100, left:$this.rn(-60, $this.ww+60)});        
-     bolla.appendTo($this.object);
-     bolla.transit({top: $this.rn($this.wh/2,$this.wh/2-60), "transform":"scale("+rn_size+") rotate("+$this.rn(-360,360)+"deg)", opacity: 0},$this.rn($this.speed[0],$this.speed[1]), function(){
-       $(this).remove();
-       $this.generate_bubbles();
-     })
-       
-    }
+    // Start the app. 
+    setTimeout( function() {
+      Nodes.init();
+    }, 10);
 
 
-background.rn = function(from, to, arr) {
-  if(arr){
-          return Math.random() * (to - from + 1) + from;
-  }else{
-    return Math.floor(Math.random() * (to - from + 1) + from);
-  }
-    }
-background.initializr()
+
