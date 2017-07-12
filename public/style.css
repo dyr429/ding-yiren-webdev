@@ -1,4 +1,4 @@
-
+@import url(https://fonts.googleapis.com/css?family=Quicksand);
 html, body, .container{
   width: 100%;
   height: 100%;
@@ -52,12 +52,18 @@ html, body, .container{
     h1 {
         font-size: 3em
     }
+
 }
 
 @media screen and (max-width: 1000px) {
     h1 {
         font-size: 2em
     }
+
+    #links{
+      margin-top: -50px;
+    }
+
 }
 
 body {
@@ -86,7 +92,7 @@ button{
 /*Button Two*/
 .button-two {
   border-radius: 4px;
-  background-color:#d35400;
+  background-color:#f96402;
   border: none;
   padding: 20px;
   width: 200px;
@@ -117,4 +123,143 @@ button{
 .button-two:hover span:after {
   opacity: 1;
   right: 0;
+}
+
+h1{
+  color: white;
+  display: inline;
+   font-size: 60px;
+  text-align: center;
+  font-family: Quicksand-bold, sans-serif;
+}
+
+h2{
+  display: inline-block;
+  font-size: 20px;
+  color: white;
+  font-family: Quicksand, sans-serif;
+}
+
+#author{
+  padding-left: 20px;
+  display: inline;
+  width: 20%;
+}
+#heart {
+  position: relative;
+  width: 100px;
+  height: 90px;
+  -webkit-animation: heart 2s infinite;
+  animation: heart 2s infinite;
+  display: inline-block;
+  top: 25px;
+}
+
+#heart:before,
+#heart:after {
+  position: absolute;
+  content: "";
+  left: 50px;
+  top: 0;
+  width: 50px;
+  height: 80px;
+  background: #f96402;
+  -moz-border-radius: 50px 50px 0 0;
+  border-radius: 50px 50px 0 0;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-transform-origin: 0 100%;
+  -moz-transform-origin: 0 100%;
+  -ms-transform-origin: 0 100%;
+  -o-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+}
+
+#heart:after {
+  left: 0;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-transform-origin: 100% 100%;
+  -moz-transform-origin: 100% 100%;
+  -ms-transform-origin: 100% 100%;
+  -o-transform-origin: 100% 100%;
+  transform-origin: 100% 100%;
+}
+
+@-webkit-keyframes heart {
+  0% {
+    -webkit-transform: scale(.75, .75);
+  }
+  16% {
+    -webkit-transform: scale(1, 1);
+  }
+  17% {
+    background-color: rgba(192, 57, 43, 0);
+  }
+  33% {
+    -webkit-transform: scale(.75, .75);
+  }
+  49% {
+    -webkit-transform: scale(1, 1);
+  }
+  50% {
+    background-color: rgba(192, 57, 43, 0);
+  }
+  100% {
+    -webkit-transform: scale(.75, .75);
+  }
+}
+
+@-moz-keyframes heart {
+  0% {
+    -moz-transform: scale(.75, .75);
+  }
+  16% {
+    -moz-transform: scale(1, 1);
+  }
+  17% {
+    background-color: rgba(192, 57, 43, 0);
+  }
+  33% {
+    -moz-transform: scale(.75, .75);
+  }
+  49% {
+    -moz-transform: scale(1, 1);
+  }
+  50% {
+    background-color: rgba(192, 57, 43, 0);
+  }
+  100% {
+    -moz-transform: scale(.75, .75);
+  }
+}
+
+@keyframes heart {
+  0% {
+    transform: scale(.75, .75);
+  }
+  16% {
+    transform: scale(1, 1);
+  }
+  17% {
+    background-color: rgba(192, 57, 43, 0);
+  }
+  33% {
+    transform: scale(.75, .75);
+  }
+  49% {
+    transform: scale(1, 1);
+  }
+  50% {
+    background-color: rgba(192, 57, 43, 0);
+  }
+  100% {
+    transform: scale(.75, .75);
+  }
 }
