@@ -1,0 +1,84 @@
+html, body{
+    height: 100%;
+}
+.container div{
+    margin-top: 10px;
+    margin-botton:10px;
+}
+
+.input-block{
+    margin-bottom: 10px;
+}
+
+.blue-header{
+    background-color: #337ab7;
+    color: white;
+}
+.grey-header{
+    background-color: lightgrey;
+    color: dimgrey;
+}
+
+.blueicon{
+    color:  #337ab7;
+}
+
+.fix-header{
+    height: 40px;
+    padding: 5px;
+
+}
+
+
+.fix-header h2{
+    padding: 15px;
+    display: inline;
+
+}
+.icon-right{
+
+    padding-right: 15px;
+    padding-top:5px;
+    font-size: 20px;
+    height: 100%;
+    float: right;
+}
+
+.icon-left{
+
+    padding-left: 15px;
+    padding-top:5px;
+    font-size: 20px;
+    height: 100%;
+    float: left;
+}
+
+.form-titled h5{
+    font-size: 20px;
+    display: block;
+    margin-top: 20px;
+}
+
+.white-list{
+    padding-top: 20px;
+}
+.white-list li{
+    color: #337ab7;
+    border: 0;
+    font-size: 15px;
+}
+
+.white-list p{
+    display: inline-block;
+}
+
+@media screen and (min-width: 768px) {
+    .left-line{
+        border-left: 1px solid lightgrey;
+    }
+}
+
+
+.full-height{
+    height: 95%;
+}
