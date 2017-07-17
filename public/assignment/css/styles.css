@@ -23,6 +23,10 @@ html, body{
     color:  #337ab7;
 }
 
+.blackicon{
+    color: black;
+}
+
 .fix-header{
     height: 40px;
     padding: 5px;
@@ -81,4 +85,42 @@ html, body{
 
 .full-height{
     height: 95%;
+}
+
+.widget-block{
+    position: relative;
+    margin: 10px 10px 10px 10px;
+
+}
+
+.widget-block h1{
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*top: 0;*/
+    z-index: 1;
+    font-size: 30px;
+    margin-top: 0;
+    margin-left: 0;
+    word-wrap:break-word;
+
+}
+.widget-block h2{
+    z-index: 1;
+    font-size: 20px;
+    margin-left: 0;
+    word-wrap:break-word;
+    margin-top: 20px;
+}
+
+.gadget{
+    background-color: white;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: inline;
+    z-index: 1;
+    font-size: 20px;
+}
+.widget-block img{
+    width:100%;
 }
