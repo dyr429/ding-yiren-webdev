@@ -139,3 +139,15 @@ html, body{
     display: inline;
     color: #337ab7;
 }
+
+.item-row{
+    margin-top: 20px;
+}
+
+.item-row-last{
+    margin-top: 20px;
+    padding-bottom: 40px;
+}
+h3{
+    display: inline;
+}
