@@ -6,6 +6,10 @@ html, body{
     margin-botton:10px;
 }
 
+.mainhead{
+    padding-top: 10%;
+}
+
 .input-block{
     margin-bottom: 10px;
 }
@@ -26,7 +30,9 @@ html, body{
 .blackicon{
     color: black;
 }
-
+.whiteicon{
+    color: white;
+}
 .fix-header{
     height: 40px;
     padding: 5px;
@@ -40,7 +46,6 @@ html, body{
 
 }
 .icon-right{
-    color: white;
     padding-right: 15px;
     padding-top:5px;
     font-size: 20px;
@@ -49,7 +54,6 @@ html, body{
 }
 
 .icon-left{
-    color: white;
     padding-left: 15px;
     padding-top:5px;
     font-size: 20px;
@@ -61,10 +65,12 @@ html, body{
     font-size: 20px;
     display: block;
     margin-top: 20px;
+    font-weight: 600;
 }
 
 .white-list{
     padding-top: 20px;
+    padding-left: 10px;
 }
 .white-list li{
     color: #337ab7;
@@ -89,7 +95,7 @@ html, body{
 
 .widget-block{
     position: relative;
-    margin: 10px 10px 10px 10px;
+    margin: 10px 0px 50px 10px;
 
 }
 
@@ -112,6 +118,11 @@ html, body{
     margin-top: 20px;
 }
 
+.widget-block p{
+    z-index: 1;
+    font-size: 15px;
+}
+
 .gadget{
     background-color: white;
     position: absolute;
@@ -123,4 +134,8 @@ html, body{
 }
 .widget-block img{
     width:100%;
+}
+.blue-p{
+    display: inline;
+    color: #337ab7;
 }
