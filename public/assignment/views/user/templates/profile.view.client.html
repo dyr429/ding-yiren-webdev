@@ -24,7 +24,9 @@
                class="form-control input-block"
                placeholder="last name"
                ng-model="model.user.lastName">
-        <a class="btn btn-primary btn-block" href="website-list.html" role="button">Websites</a>
+        <a class="btn btn-primary btn-block"
+           role="button"
+           href="#/user/{{model.user._id}}/website">Websites</a>
         <a class="btn btn-primary btn-block"
            role="button"
            ng-click="model.updateUser(model.user)">Update Profile</a>

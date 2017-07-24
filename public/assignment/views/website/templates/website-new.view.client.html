@@ -13,20 +13,8 @@
 <div class="container-fluid full-height">
     <div class="container col-sm-4 hidden-xs full-height">
         <ul class="list-group white-list">
-            <li class="list-group-item">
-                <p>Address Book App</p>
-                <span class="glyphicon glyphicon-cog icon-right"></span>
-            </li>
-            <li class="list-group-item">
-                <p>Blogger</p>
-                <span class="glyphicon glyphicon-cog icon-right"></span>
-            </li>
-            <li class="list-group-item">
-                <p>Blogging App</p>
-                <span class="glyphicon glyphicon-cog icon-right"></span>
-            </li>
-            <li class="list-group-item">
-                <p>Script Testing App</p>
+            <li ng-repeat="website in model.websites" class="list-group-item">
+                <p>{{website.name}}</p>
                 <span class="glyphicon glyphicon-cog icon-right"></span>
             </li>
         </ul>
@@ -35,9 +23,15 @@
     <div class="container col-sm-8 col-xs-12 left-line full-height">
         <form class="form-titled form-horizontal">
             <h5>Name</h5>
-            <input type="text" class="form-control input-block" placeholder="Name">
+            <input type="text"
+                   class="form-control input-block"
+                   placeholder="Name"
+                   ng-model="model.newwebsite.name">
             <h5>Description</h5>
-            <textarea rows="3"  class="form-control input-block" placeholder="Description"></textarea>
+            <textarea rows="3"
+                      class="form-control input-block"
+                      placeholder="Description"
+                      ng-model="model.newwebsite.description"></textarea>
             <a class="btn btn-danger btn-block" href="website-list.html" role="button">Delete</a>
         </form>
     </div>

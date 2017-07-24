@@ -18,8 +18,8 @@
 
         var api = {
             "createWebsite"   : createWebsite,
-            "findWebsiteById" : findWebsiteByUserId,
-            "findWebsiteByUserId" : findWebsiteById,
+            "findWebsiteById" : findWebsiteById,
+            "findWebsiteByUserId" : findWebsiteByUserId,
             "updateWebsite": updateWebsite,
             "deleteWebsite" : deleteWebsite,
         };
