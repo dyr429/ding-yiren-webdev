@@ -1,0 +1,40 @@
+<div class="fixed-top fix-header blue-header">
+    <h2>Profile</h2>
+    <a href="profile.html"><span class="glyphicon glyphicon-ok icon-right whiteicon">
+   
+    </span> </a>
+</div>
+<div class="container">
+    <form class="form-titled form-horizontal">
+        <h5>Username</h5>
+        <input type="text"
+               class="form-control input-block"
+               placeholder="username"
+               ng-model="model.user.username">
+        <h5>Email</h5>
+        <input type="email" class="form-control input-block" placeholder="email" value="jannunzi@gmail.com">
+        <h5>First Name</h5>
+        <input type="text"
+               class="form-control input-block"
+               placeholder="first name"
+               ng-model="model.user.firstName"
+        >
+        <h5>Last Name</h5>
+        <input type="text"
+               class="form-control input-block"
+               placeholder="last name"
+               ng-model="model.user.lastName">
+        <a class="btn btn-primary btn-block" href="website-list.html" role="button">Websites</a>
+        <a class="btn btn-primary btn-block"
+           role="button"
+           ng-click="model.updateUser(model.user)">Update Profile</a>
+        <a class="btn btn-danger btn-block"
+           role="button"
+           ng-click="model.unregister()">Unregister</a>
+        <a class="btn btn-danger btn-block" href="#/login" role="button">Log Out</a>
+    </form>
+</div>
+
+<div class="navbar-fixed-bottom fix-header blue-header">
+    <a href="profile.html"><span class="glyphicon glyphicon-user icon-right whiteicon"></span></a>
+</div>
