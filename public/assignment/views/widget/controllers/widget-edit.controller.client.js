@@ -39,7 +39,7 @@
                 + model.pageId + "/widget");
         }
         function getWidgetEdit(){
-            var url = "public/assignment/views/widget/editors/widget-"
+            var url = "../editors/widget-"
             url += model.thiswidget.widgetType;
             url += "-edit.view.client.html"
             return url;
