@@ -19,8 +19,8 @@
 
         var api = {
             "createWidget"   : createWidget,
-            "findWidgetById" : findWidgetByPageId,
-            "findWidgetByPageId" : findWidgetById,
+            "findWidgetById" : findWidgetById,
+            "findWidgetByPageId" : findWidgetByPageId,
             "updateWidget": updateWidget,
             "deleteWidget" : deleteWidget,
         };
@@ -42,7 +42,7 @@
             return null;
         }
         function findWidgetByPageId(pageId) {
-            var result = new Array();
+            var result = [];
             for(var w in widgets){
                 var _widget = widgets[w];
                 if(_widget.pageId === pageId){

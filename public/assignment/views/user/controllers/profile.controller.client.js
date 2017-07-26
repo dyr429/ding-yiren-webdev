@@ -5,17 +5,18 @@
         .controller("profileController", profileController)
 
     function profileController($routeParams,$location, userService) {
-        //variable from path
-        var userId = $routeParams["uid"];
         //declare controller
         var model = this;
+        //variable from path
+        model.userId = $routeParams["uid"];
         //declare function
         model.updateUser = updateUser;
         model.unregister = unregister;
+        model.showPassword = showPassword;
 
         //initial function
         function init() {
-            model.user = userService.findUserById(userId);
+            model.user = userService.findUserById(model.userId);
         }
         init();
 
@@ -29,8 +30,24 @@
         }
 
         function unregister(){
-            userService.deleteUser(userId);
+            userService.deleteUser(model.userId);
             $location.url("/");
+        }
+
+        function showPassword() {
+            var pass=document.getElementById("pass");
+            var passbtn = document.getElementById("passbtn");
+            if(pass.type === "text"){
+                pass.type = "password";
+                passbtn.innerHTML = "Show Password";
+            }else{
+                pass.type = "text";
+                passbtn.innerHTML = "Hide Password";
+            }
+
+
+
+
         }
 
 

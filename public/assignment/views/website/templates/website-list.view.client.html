@@ -1,43 +1,25 @@
 
 <div class="fixed-top fix-header blue-header">
-    <a href="profile.html"><span class="glyphicon glyphicon-chevron-left icon-left whiteicon"></span></a>
+    <a href="#/user/{{model.userId}}"><span class="glyphicon glyphicon-chevron-left icon-left whiteicon"></span></a>
     <h2>Websites</h2>
     <a href="#/user/{{model.userId}}/website/new"><
         <span class="glyphicon glyphicon-plus icon-right whiteicon"></span>
     </a>
 </div>
+
 <div class="container-fluid">
     <ul class="list-group white-list item-row">
         <li ng-repeat="website in model.websites" class="list-group-item">
-            <a href="page-list.html"><h3>{{website.name}}</h3></a>
-            <a href="website-edit.html">
+            <a href="#/user/{{model.userId}}/website/{{website._id}}/page"><h3>{{website.name}}</h3></a>
+            <a href="#/user/{{model.userId}}/website/{{website._id}}">
                 <span class="glyphicon glyphicon-cog icon-right"></span>
             </a>
         </li>
-        <!--<li class="list-group-item item-row">-->
-            <!--<a href="page-list.html"><h3>Blogger</h3></a>-->
-            <!--<a href="website-edit.html">-->
-                <!--<span class="glyphicon glyphicon-cog icon-right"></span>-->
-            <!--</a>-->
-        <!--</li>-->
-        <!--<li class="list-group-item item-row">-->
-            <!--<a href="page-list.html"><h3>Blogging App</h3></a>-->
-            <!--<a href="website-edit.html">-->
-                <!--<span class="glyphicon glyphicon-cog icon-right"></span>-->
-            <!--</a>-->
-        <!--</li>-->
-        <!--<li class="list-group-item item-row item-row-last">-->
-            <!--<a href="page-list.html"><h3>Script Testing App</h3></a>-->
-            <!--<a href="website-edit.html">-->
-                <!--<span class="glyphicon glyphicon-cog icon-right"></span>-->
-            <!--</a>-->
-        <!--</li>-->
     </ul>
-
 </div>
 
 <div class="navbar-fixed-bottom fix-header blue-header">
-    <a href="profile.html">
+    <a href="#/user/{{model.userId}}">
     <span class="glyphicon glyphicon-user icon-right whiteicon"></span>
     </a>
 </div>

@@ -18,6 +18,8 @@
 
         function newWebsite() {
             var _website = model.newwebsite;
+            websiteService.createWebsite(model.userId, _website);
+            $location.url("user/" + model.userId + "/website");
 
 
         }

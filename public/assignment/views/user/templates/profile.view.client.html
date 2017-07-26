@@ -11,8 +11,13 @@
                class="form-control input-block"
                placeholder="username"
                ng-model="model.user.username">
-        <h5>Email</h5>
-        <input type="email" class="form-control input-block" placeholder="email" value="jannunzi@gmail.com">
+        <h5>Password</h5>
+        <input type="Password"
+               class="form-control input-block"
+               placeholder="password"
+               ng-model="model.user.password"
+               id="pass"
+        >
         <h5>First Name</h5>
         <input type="text"
                class="form-control input-block"
@@ -29,6 +34,11 @@
            href="#/user/{{model.user._id}}/website">Websites</a>
         <a class="btn btn-primary btn-block"
            role="button"
+           id="passbtn"
+           href=""
+           ng-click="model.showPassword()">Show Password</a>
+        <a class="btn btn-primary btn-block"
+           role="button"
            ng-click="model.updateUser(model.user)">Update Profile</a>
         <a class="btn btn-danger btn-block"
            role="button"
@@ -38,5 +48,5 @@
 </div>
 
 <div class="navbar-fixed-bottom fix-header blue-header">
-    <a href="profile.html"><span class="glyphicon glyphicon-user icon-right whiteicon"></span></a>
+    <a href="#/user/{{model.userId}}"><span class="glyphicon glyphicon-user icon-right whiteicon"></span></a>
 </div>

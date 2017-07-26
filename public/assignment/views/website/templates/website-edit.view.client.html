@@ -1,33 +1,22 @@
-
 <div class="fixed-top fix-header blue-header hidden-xs col-sm-4">
-    <a href="website-list.html"><span class="glyphicon glyphicon-chevron-left icon-left whiteicon"></span></a>
+    <a href="#/user/{{model.userId}}/website"><span class="glyphicon glyphicon-chevron-left icon-left whiteicon"></span></a>
     <h2>Websites</h2>
-    <a href="website-new.html"><span class="glyphicon glyphicon-plus icon-right whiteicon"></span></a>
+    <a href="#/user/{{model.userId}}/website/new"><span class="glyphicon glyphicon-plus icon-right whiteicon"></span></a>
 </div>
 
 <div class="fixed-top fix-header blue-header col-xs-12 col-sm-8">
     <h2>Edit Website</h2>
-    <a href="website-list.html"><span class="glyphicon glyphicon-ok icon-right whiteicon"></span></a>
+    <a href="" ng-click="model.updateWebsite()"><span class="glyphicon glyphicon-ok icon-right whiteicon"></span></a>
 </div>
 
 <div class="container-fluid full-height">
     <div class="container col-sm-4 hidden-xs full-height">
-        <ul class="list-group white-list">
-            <li class="list-group-item">
-                <p>Address Book App</p>
-                <span class="glyphicon glyphicon-cog icon-right"></span>
-            </li>
-            <li class="list-group-item">
-                <p>Blogger</p>
-                <span class="glyphicon glyphicon-cog icon-right"></span>
-            </li>
-            <li class="list-group-item">
-                <p>Blogging App</p>
-                <span class="glyphicon glyphicon-cog icon-right"></span>
-            </li>
-            <li class="list-group-item">
-                <p>Script Testing App</p>
-                <span class="glyphicon glyphicon-cog icon-right"></span>
+        <ul class="list-group white-list item-row">
+            <li ng-repeat="website in model.websites" class="list-group-item">
+                <a href=""><h3>{{website.name}}</h3></a>
+                <a href="#/user/{{model.userId}}/website/{{website._id}}">
+                    <span class="glyphicon glyphicon-cog icon-right"></span>
+                </a>
             </li>
         </ul>
     </div>
@@ -35,15 +24,24 @@
     <div class="container col-sm-8 col-xs-12 left-line full-height">
         <div class="form-titled">
             <h5>Name</h5>
-            <input type="text" class="form-control input-block" placeholder="websites name" value="Blogger">
+            <input type="text" class="form-control input-block"
+                   placeholder="website name"
+                   ng-model="model.thiswebsite.name">
             <h5>Description</h5>
-            <textarea rows="5"  class="form-control input-block" placeholder="website desciption">Northeastern Universit(NU,formerly NEU) is a private research university in Boston, Massachusetts, establishedin 1898.It is categorized as anR1 institution (Doctoral Universities: Highest Research Activity) by the CarnegieClassification of Institutions of Higher Education</textarea>
-            <a class="btn btn-danger btn-block" href="" role="button">Delete</a>
+            <textarea rows="5"
+                      class="form-control input-block"
+                      placeholder="website description"
+                      ng-model="model.thiswebsite.description"></textarea>
+            <a class="btn btn-danger btn-block"
+               href=""
+               role="button"
+               ng-click="model.deleteWebsite()">Delete</a>
         </div>
+
     </div>
 
 </div>
 
 <div class="navbar-fixed-bottom fix-header blue-header">
-    <a href="profile.html"><span class="glyphicon glyphicon-user icon-right whiteicon"></span></a>
+    <a href="#/user/{{model.userId}}"><span class="glyphicon glyphicon-user icon-right whiteicon"></span></a>
 </div>

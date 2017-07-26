@@ -1,38 +1,30 @@
 <div class="fixed-top fix-header grey-header">
-    <a href="website-list.html"><span class="glyphicon glyphicon-chevron-left icon-left blackicon"></span></a>
+    <a href="#/user/{{model.userId}}/website/">
+        <span class="glyphicon glyphicon-chevron-left icon-left blackicon"></span>
+    </a>
     <h2>Pages</h2>
-    <a href="page-new.html"><span class="glyphicon glyphicon-plus icon-right blackicon"></span></a>
+    <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/new">
+        <span class="glyphicon glyphicon-plus icon-right blackicon"></span>
+    </a>
 </div>
 
 
 <div class="container-fluid">
-    <ul class="list-group white-list">
-        <li class="list-group-item item-row">
-            <a href="widget-list.html"><h3>Blog Post</h3></a>
-            <a href="page-edit.html"><span class="glyphicon glyphicon-cog icon-right"></span></a>
-        </li>
-        <li class="list-group-item item-row">
-            <a href="widget-list.html"><h3>Blogs</h3></a>
-            <a href="page-edit.html"><span class="glyphicon glyphicon-cog icon-right"></span></a>
-        </li>
-        <li class="list-group-item item-row">
-            <a href="widget-list.html"><h3>Homes</h3></a>
-            <a href="page-edit.html"><span class="glyphicon glyphicon-cog icon-right"></span></a>
-        </li>
-        <li class="list-group-item item-row">
-            <a href="widget-list.html"><h3>About</h3></a>
-            <a href="page-edit.html"><span class="glyphicon glyphicon-cog icon-right"></span></a>
-        </li>
-        <li class="list-group-item item-row-last">
-            <a href="widget-list.html"><h3>Contact Us</h3></a>
-            <a href="page-edit.html"><span class="glyphicon glyphicon-cog icon-right"></span></a>
+    <ul class="list-group white-list item-row">
+        <li ng-repeat="page in model.pages" class="list-group-item">
+            <a href="#/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}/widget">
+                <h3>{{page.name}}</h3>
+            </a>
+            <a href="#/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}">
+                <span class="glyphicon glyphicon-cog icon-right"></span>
+            </a>
         </li>
     </ul>
 </div>
-</div>
+
 
 
 
 <div class="navbar-fixed-bottom fix-header grey-header">
-    <a href="profile.html"><span class="glyphicon glyphicon-user icon-right blueicon"></span></a>
+    <a href="#/user/{{model.userId}}"><span class="glyphicon glyphicon-user icon-right blueicon"></span></a>
 </div>

@@ -2,12 +2,11 @@
 <div class="fixed-top fix-header blue-header hidden-xs col-sm-4">
     <a href="website-list.html"><span class="glyphicon glyphicon-chevron-left icon-left whiteicon"></span></a>
     <h2>Websites</h2>
-    <span class="glyphicon glyphicon-plus icon-right whiteicon"></span>
 </div>
 
 <div class="fixed-top fix-header blue-header col-xs-12 col-sm-8">
     <h2>New Website</h2>
-    <a href="website-list.html"><<span class="glyphicon glyphicon-ok icon-right whiteicon"></span></a>
+    <a href="" ng-click="model.newWebsite()"><span class="glyphicon glyphicon-ok icon-right whiteicon"></span></a>
 </div>
 
 <div class="container-fluid full-height">
@@ -32,12 +31,11 @@
                       class="form-control input-block"
                       placeholder="Description"
                       ng-model="model.newwebsite.description"></textarea>
-            <a class="btn btn-danger btn-block" href="website-list.html" role="button">Delete</a>
         </form>
     </div>
 
 </div>
 
 <div class="navbar-fixed-bottom fix-header blue-header">
-    <a href="profile.html"><span class="glyphicon glyphicon-user icon-right whiteicon"></span></a>
+    <a href="#/user/{{model.userId}}"><span class="glyphicon glyphicon-user icon-right whiteicon"></span></a>
 </div>

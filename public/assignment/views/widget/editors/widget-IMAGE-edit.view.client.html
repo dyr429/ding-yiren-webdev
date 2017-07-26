@@ -1,0 +1,28 @@
+<div class="container">
+    <form class="form-titled form-horizontal">
+        <h5>Id</h5>
+        <input type="text" class="form-control input-block"
+               ng-model="model.thiswidget._id"
+               readonly/>
+        <h5>Type</h5>
+        <input type="text" class="form-control input-block"
+               ng-model="model.thiswidget.widgetType"
+               readonly/>
+        <h5>Width</h5>
+        <input type="text" class="form-control input-block"
+               placeholder="size"
+               ng-model="model.thiswidget.width"
+        />
+
+        <h5>Url</h5>
+        <textarea rows="5"
+                  class="form-control input-block"
+                  placeholder="url"
+                  ng-model="model.thiswidget.url">
+            </textarea>
+        <a class="btn btn-danger btn-block"
+           href=""
+           role="button"
+           ng-click="model.deleteWidget()">Delete</a>
+    </form>
+</div>

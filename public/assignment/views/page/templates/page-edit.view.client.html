@@ -1,20 +1,51 @@
+<div class="fixed-top fix-header grey-header hidden-xs col-sm-4">
+    <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page"><span class="glyphicon glyphicon-chevron-left icon-left blackicon"></span></a>
+    <h2>Pages</h2>
+    <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/new"><span class="glyphicon glyphicon-plus icon-right blackicon"></span></a>
+</div>
+
 <div class="fixed-top fix-header grey-header">
-    <a href="page-list.html"><span class="glyphicon glyphicon-chevron-left icon-left blackicon"></span></a>
     <h2>Edit Page</h2>
-    <a href="page-list.html"><span class="glyphicon glyphicon-ok icon-right blackicon"></span></a>
+    <a href="" ng-click="model.updatePage()">
+        <span class="glyphicon glyphicon-ok icon-right blackicon"></span>
+    </a>
 </div>
-<div class="container">
-    <div class="form-titled"
-    <form class="form-horizontal">
-        <h5>Name</h5>
-        <input type="text" class="form-control input-block" value="Blog Post" >
-        <h5>Title</h5>
-        <input type="text" class="form-control input-block" placeholder="Page Title">
-        <a class="btn btn-danger btn-block" href="page-list.html" role="button">Delete</a>
-    </form>
-</div>
+
+<div class="container-fluid full-height">
+    <div class="container col-sm-4 hidden-xs full-height">
+        <ul class="list-group white-list item-row">
+            <li ng-repeat="page in model.pages" class="list-group-item">
+                <a href="#/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}/widget">
+                    <h3>{{page.name}}</h3>
+                </a>
+                <a href="#/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}">
+                    <span class="glyphicon glyphicon-cog icon-right"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container col-sm-8 col-xs-12 left-line full-height">
+        <div class="form-titled">
+            <h5>Name</h5>
+            <input type="text" class="form-control input-block"
+                   placeholder="page name"
+                   ng-model="model.thispage.name">
+            <h5>Description</h5>
+            <textarea rows="5"
+                      class="form-control input-block"
+                      placeholder="page description"
+                      ng-model="model.thispage.description"></textarea>
+            <a class="btn btn-danger btn-block"
+               href=""
+               role="button"
+               ng-click="model.deletePage()">Delete</a>
+        </div>
+
+    </div>
+
 </div>
 
 <div class="navbar-fixed-bottom fix-header grey-header">
-    <a href="profile.html"><span class="glyphicon glyphicon-user icon-right blueicon"></span></a>
+    <a href="#/user/{{model.userId}}"><span class="glyphicon glyphicon-user icon-right blueicon"></span></a>
 </div>

@@ -1,0 +1,19 @@
+<div class="fixed-top fix-header grey-header">
+    <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+        <span class="glyphicon glyphicon-chevron-left icon-left blackicon"></span>
+    </a>
+    <h2>Widget Edit</h2>
+    <a href="" ng-click="model.updateWidget()"><span class="glyphicon glyphicon-ok icon-right blackicon">
+
+    </span> </a>
+</div>
+
+<div class="container-fluid">
+    <div ng-include="model.getWidgetEdit()"></div>
+</div>
+
+<div class="navbar-fixed-bottom fix-header grey-header">
+</div>
+
+
+

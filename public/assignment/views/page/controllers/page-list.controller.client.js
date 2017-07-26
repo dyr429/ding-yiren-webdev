@@ -1,3 +1,24 @@
-/**
- * Created by dyr42 on 7/23/2017.
- */
+
+(function() {
+    angular
+        .module("WebAppMaker")
+        .controller("pageListController", pageListController)
+
+    function pageListController($routeParams,$location, pageService) {
+        //declare controller
+        var model = this;
+        //variable from path
+        model.userId = $routeParams["uid"];
+        model.websiteId = $routeParams["wid"];
+
+        //declare function
+        //initial function
+        function init() {
+            model.pages = pageService.findPageByWebsiteId(model.websiteId);
+        }
+        init();
+
+        //functions
+    }
+
+})();

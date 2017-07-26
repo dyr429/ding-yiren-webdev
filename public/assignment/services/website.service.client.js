@@ -41,7 +41,7 @@
             return null;
         }
         function findWebsiteByUserId(userId) {
-            var result = new Array();
+            var result = [];
             for(var w in websites){
                 var _website = websites[w];
                 if(_website.developerId === userId){
