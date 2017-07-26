@@ -32,7 +32,7 @@
             return $sce.trustAsResourceUrl(youtubeUrl);
         }
         function getWidget(type){
-            var url = "../widget-"
+            var url = "views/widget/templates/widget-"
             url += type;
             url += ".view.client.html"
             return url;
