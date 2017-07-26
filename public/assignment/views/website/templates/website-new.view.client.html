@@ -1,6 +1,6 @@
 
 <div class="fixed-top fix-header blue-header hidden-xs col-sm-4">
-    <a href="website-list.html"><span class="glyphicon glyphicon-chevron-left icon-left whiteicon"></span></a>
+    <a href="#/user/{{model.userId}}/website/"><span class="glyphicon glyphicon-chevron-left icon-left whiteicon"></span></a>
     <h2>Websites</h2>
 </div>
 
@@ -13,8 +13,12 @@
     <div class="container col-sm-4 hidden-xs full-height">
         <ul class="list-group white-list">
             <li ng-repeat="website in model.websites" class="list-group-item">
-                <p>{{website.name}}</p>
-                <span class="glyphicon glyphicon-cog icon-right"></span>
+                <a href="#!/user/{{model.userId}}/website/{{website._id}}/page">
+                    <h3>{{website.name}}</h3>
+                </a>
+                <a href="#!/user/{{model.userId}}/website/{{website._id}}">
+                    <span class="glyphicon glyphicon-cog icon-right"></span>
+                </a>
             </li>
         </ul>
     </div>
@@ -37,5 +41,5 @@
 </div>
 
 <div class="navbar-fixed-bottom fix-header blue-header">
-    <a href="#/user/{{model.userId}}"><span class="glyphicon glyphicon-user icon-right whiteicon"></span></a>
+    <a href="#!/user/{{model.userId}}"><span class="glyphicon glyphicon-user icon-right whiteicon"></span></a>
 </div>

@@ -1,9 +1,9 @@
 <div class="fixed-top fix-header grey-header">
-    <a href="#/user/{{model.userId}}/website/">
+    <a href="#!/user/{{model.userId}}/website/">
         <span class="glyphicon glyphicon-chevron-left icon-left blackicon"></span>
     </a>
     <h2>Pages</h2>
-    <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/new">
+    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/new">
         <span class="glyphicon glyphicon-plus icon-right blackicon"></span>
     </a>
 </div>
@@ -12,10 +12,10 @@
 <div class="container-fluid">
     <ul class="list-group white-list item-row">
         <li ng-repeat="page in model.pages" class="list-group-item">
-            <a href="#/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}/widget">
+            <a href="#!/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}/widget">
                 <h3>{{page.name}}</h3>
             </a>
-            <a href="#/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}">
+            <a href="#!/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}">
                 <span class="glyphicon glyphicon-cog icon-right"></span>
             </a>
         </li>
@@ -26,5 +26,5 @@
 
 
 <div class="navbar-fixed-bottom fix-header grey-header">
-    <a href="#/user/{{model.userId}}"><span class="glyphicon glyphicon-user icon-right blueicon"></span></a>
+    <a href="#!/user/{{model.userId}}"><span class="glyphicon glyphicon-user icon-right blueicon"></span></a>
 </div>

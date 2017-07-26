@@ -16,17 +16,18 @@
 
         //initial function
         function init() {
-            model.user = userService.findUserById(model.userId);
+            model.user = cloneObj(userService.findUserById(model.userId));
         }
         init();
 
         //functions
         function updateUser(user){
             var _user = userService.updateUser(user._id, user);
+            model.user = cloneObj(_user);
             if(_user){
                 alert("update scceuss")
             }
-            $location.url("user/" + user._id);
+     //       $location.url("user/" + user._id);
         }
 
         function unregister(){
@@ -44,9 +45,6 @@
                 pass.type = "text";
                 passbtn.innerHTML = "Hide Password";
             }
-
-
-
 
         }
 

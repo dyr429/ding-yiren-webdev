@@ -31,7 +31,7 @@
                ng-model="model.user.lastName">
         <a class="btn btn-primary btn-block"
            role="button"
-           href="#/user/{{model.user._id}}/website">Websites</a>
+           href="#!/user/{{model.user._id}}/website">Websites</a>
         <a class="btn btn-primary btn-block"
            role="button"
            id="passbtn"
@@ -43,10 +43,10 @@
         <a class="btn btn-danger btn-block"
            role="button"
            ng-click="model.unregister()">Unregister</a>
-        <a class="btn btn-danger btn-block" href="#/login" role="button">Log Out</a>
+        <a class="btn btn-danger btn-block" href="#!/login" role="button">Log Out</a>
     </form>
 </div>
 
 <div class="navbar-fixed-bottom fix-header blue-header">
-    <a href="#/user/{{model.userId}}"><span class="glyphicon glyphicon-user icon-right whiteicon"></span></a>
+    <a href="#!/user/{{model.userId}}"><span class="glyphicon glyphicon-user icon-right whiteicon"></span></a>
 </div>
