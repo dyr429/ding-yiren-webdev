@@ -12,10 +12,15 @@
 
         function register(user) {
             var _user = userService.findUserByUsername(user.username);
-            if(!_user){ var user = userService.createUser(user);
-                $location.url("/user/" + user._id);
+            if (model.user.password === model.verifypassword) {
+                if (!_user) {
+                    var user = userService.createUser(user);
+                    $location.url("/user/" + user._id);
+                } else {
+                    model.errorMessage = "username already exist";
+                }
             }else{
-                model.errorMessage = "username already exist";
+                model.errorMessage = "password do not match";
             }
 
 
