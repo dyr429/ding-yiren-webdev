@@ -13,7 +13,7 @@
     <div class="container col-sm-4 hidden-xs full-height">
         <ul class="list-group white-list item-row">
             <li ng-repeat="website in model.websites" class="list-group-item">
-                <a href=""><h3>{{website.name}}</h3></a>
+                <a href="#!/user/{{model.userId}}/website/{{website._id}}/page"><h3>{{website.name}}</h3></a>
                 <a href="#!/user/{{model.userId}}/website/{{website._id}}">
                     <span class="glyphicon glyphicon-cog icon-right"></span>
                 </a>
