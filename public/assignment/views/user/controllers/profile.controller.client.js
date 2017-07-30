@@ -16,23 +16,30 @@
 
         //initial function
         function init() {
-            model.user = cloneObj(userService.findUserById(model.userId));
+            userService.findUserById(model.userId)
+                .then(function (response) {
+                    model.user = response.data;
+                 });
         }
         init();
 
         //functions
         function updateUser(user){
-            var _user = userService.updateUser(user._id, user);
-            model.user = cloneObj(_user);
-            if(_user){
-                alert("update scceuss")
-            }
+            userService.updateUser(user._id, user)
+                .then(function (response) {
+                model.user = response.data;
+                // model.user = cloneObj(_user);
+                if(model.user != "0"){
+                    alert("update scceuss")
+                }
+            });
+
      //       $location.url("user/" + user._id);
         }
 
         function unregister(){
             userService.deleteUser(model.userId);
-            $location.url("/");
+            $location.url("/login");
         }
 
         function showPassword() {

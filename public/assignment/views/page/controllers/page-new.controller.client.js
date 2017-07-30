@@ -13,15 +13,21 @@
         model.newPage = newPage;
         // functins
         function init() {
-            model.pages = pageService.findPageByWebsiteId(model.websiteId);
+            pageService.findPageByWebsiteId(model.websiteId)
+                .then(function (response) {
+                    model.pages = response.data;
+                });
         }
         init();
 
         function newPage() {
-            pageService.createPage(model.websiteId, model.newpage);
-            $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page");
-
-
+            pageService.createPage(model.websiteId, model.newpage)
+                .then(function (response) {
+                    if(response.data != "0")
+                        $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page");
+                    else
+                        alert("cannot create new page");
+                });
         }
 
     }

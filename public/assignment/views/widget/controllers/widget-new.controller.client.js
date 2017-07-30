@@ -22,8 +22,17 @@
         init();
 
         function newWidget() {
-            var _newwidget = widgetService.createWidget(model.pageId, model.newwidget);
-            $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget/" + _newwidget._id);
+            widgetService.createWidget(model.pageId, model.newwidget)
+                .then(function (response) {
+                    if(response.data != "0"){
+                        var _newwidget = response.data;
+                        $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget/" + _newwidget._id);
+                    }
+                    else{
+                        alert("create fail");
+                    }
+                });
+
         }
 
         function newHeadingWidget() {

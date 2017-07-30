@@ -8,34 +8,22 @@
         //declare controller
         var model = this;
         //variable from path
-        var userId = $routeParams["uid"];
-        var websiteId = $routeParams["wid"];
+        model.userId = $routeParams["uid"];
+        model.websiteId = $routeParams["wid"];
         //declare function
         model.updateWebsite = updateWebsite;
         model.deleteWebsite = deleteWebsite;
 
-
-        // var cloneObj = function(obj){
-        //     var str, newobj = obj.constructor === Array ? [] : {};
-        //     if(typeof obj !== 'object'){
-        //         return;
-        //     } else if(window.JSON){
-        //         str = JSON.stringify(obj),
-        //             newobj = JSON.parse(str);
-        //     } else {
-        //         for(var i in obj){
-        //             newobj[i] = typeof obj[i] === 'object' ?
-        //                 cloneObj(obj[i]) : obj[i];
-        //         }
-        //     }
-        //     return newobj;
-        // };
         //initial function
         function init() {
-            model.websites = websiteService.findWebsiteByUserId(userId);
-            model.thiswebsite = cloneObj(websiteService.findWebsiteById(websiteId));
-            model.userId = userId;
-            model.websiteId = websiteId;
+            websiteService.findWebsiteByUserId(model.userId)
+                .then(function (response) {
+                    model.websites = response.data;
+                });
+            websiteService.findWebsiteById(model.websiteId)
+                .then(function (response) {
+                    model.thiswebsite = response.data;
+                });
         }
         init();
 
@@ -43,16 +31,27 @@
 
 
         function updateWebsite(user){
-            var _website = websiteService.updateWebsite(websiteId, model.thiswebsite);
-            if(_website){
-                alert("update scceuss")
-            }
-            $location.url("user/" + userId + "/website");
+            websiteService.updateWebsite(model.websiteId, model.thiswebsite)
+                .then(function (response) {
+                    var _website = response.data;
+                    if(_website != "0"){
+                        alert("update scceuss");
+                    }
+                });
+
+            $location.url("user/" + model.userId + "/website");
         }
 
         function deleteWebsite(){
-            websiteService.deleteWebsite(websiteId);
-            $location.url("user/" + userId + "/website");
+            websiteService.deleteWebsite(model.websiteId)
+                .then(function (response) {
+                    var deletewebsite = response.data;
+                    if(deletewebsite != "0"){
+                        alert("update scceuss");
+                    }
+                });
+
+            $location.url("user/" + model.userId + "/website");
         }
 
 

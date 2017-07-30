@@ -17,7 +17,10 @@
         model.getWidget = getWidget;
         //initial function
         function init() {
-            model.widgets = widgetService.findWidgetByPageId(model.pageId);
+            widgetService.findWidgetByPageId(model.pageId)
+                .then(function (response) {
+                    model.widgets = response.data;
+                });
         }
         init();
 

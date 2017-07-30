@@ -17,41 +17,41 @@
         model.deleteWidget = deleteWidget;
         model.getWidgetEdit = getWidgetEdit;
 
-        // var cloneObj = function(obj){
-        //     var str, newobj = obj.constructor === Array ? [] : {};
-        //     if(typeof obj !== 'object'){
-        //         return;
-        //     } else if(window.JSON){
-        //         str = JSON.stringify(obj),
-        //             newobj = JSON.parse(str);
-        //     } else {
-        //         for(var i in obj){
-        //             newobj[i] = typeof obj[i] === 'object' ?
-        //                 cloneObj(obj[i]) : obj[i];
-        //         }
-        //     }
-        //     return newobj;
-        // };
         //initial function
         function init() {
-            model.thiswidget = cloneObj(widgetService.findWidgetById(model.widgetId));
+            widgetService.findWidgetById(model.widgetId)
+                .then(function (response) {
+                    model.thiswidget = response.data;
+                });
         }
         init();
 
         //functions
         function updateWidget() {
-            var _widget = widgetService.updateWidget(model.widgetId,model.thiswidget);
-            if(_widget){
-                alert("update scceuss");
-            }
-            $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/"
-                + model.pageId + "/widget");
-
+            widgetService.updateWidget(model.widgetId,model.thiswidget)
+                .then(function (response) {
+                    if(response.data != "0"){
+                        alert("update scceuss");
+                        $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/"
+                            + model.pageId + "/widget");
+                    }
+                    else{
+                        alert("update fail");
+                    }
+                });
         }
         function deleteWidget(){
-            widgetService.deleteWidget(model.widgetId);
-            $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/"
-                + model.pageId + "/widget");
+            widgetService.deleteWidget(model.widgetId)
+                .then(function (response) {
+                    if(response.data!="0"){
+                        alert("delete success");
+                        $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/"
+                            + model.pageId + "/widget");
+                    }
+                    else {
+                        alert("delete fail");
+                    }
+                });
         }
         function getWidgetEdit(){
             var url = "views/widget/editors/widget-"
