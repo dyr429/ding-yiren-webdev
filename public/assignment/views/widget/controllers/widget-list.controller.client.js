@@ -17,8 +17,6 @@
         model.getWidget = getWidget;
         //initial function
         function init() {
-            $( "#sortable" ).sortable();
-            $( "#sortable" ).disableSelection();
             widgetService.findWidgetByPageId(model.pageId)
                 .then(function (response) {
                     model.widgets = response.data;

@@ -10,13 +10,11 @@
 </div>
 
 <div class="container-fluid">
-    <ul id="sortable">
+    <div sortable-list class="container-fluid" >
         <div ng-repeat="widget in model.widgets">
-            <li class="ui-state-default">
-                <div ng-include="model.getWidget(widget.widgetType)"></div>
-            </li>
+            <div ng-include="model.getWidget(widget.widgetType)"></div>
         </div>
-    </ul>
+    </div>
 </div>
 
 

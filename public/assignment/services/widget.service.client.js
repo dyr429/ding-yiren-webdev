@@ -13,6 +13,7 @@
             "findWidgetByPageId" : findWidgetByPageId,
             "updateWidget": updateWidget,
             "deleteWidget" : deleteWidget,
+            "sortWidget" : sortWidget,
         };
         return api;
         function createWidget(pageId, widget) {
@@ -38,6 +39,17 @@
             var url = "/api/widget/" + widgetId;
             return $http.delete(url);
         }
+
+        function sortWidget(index1, index2,pageId){
+            var url = "/api/page/" + pageId + "/widget?initial=" + index1 + "&final=" + index2
+            return $http.put(url)
+                .then(function (response) {
+                    return response.data;
+                });
+
+        }
+
+
     }
 })();
 

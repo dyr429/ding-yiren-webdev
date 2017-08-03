@@ -21,6 +21,7 @@ var widgets = [
 
 
 // html handlers
+app.put("/api/page/:pageId/widget",sortWidget);
 app.post("/api/upload", upload.single('myFile'), uploadImage);
 app.post("/api/page/:pageId/widget", createWidget);
 app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
@@ -54,6 +55,39 @@ function uploadImage(req, res) {
 
 }
 
+
+function sortWidget(req, res){
+    var index1 = req.query['initial'];
+    var index2 = req.query['final'];
+    var pageId = req.params.pageId;
+    if(index1 != index2) {
+        reorderWidget(pageId, index1, index2);
+    }
+    res.sendStatus(200);
+}
+
+function reorderWidget(pageId, start, end) {
+    var count = 0;
+    var realIndexStart = 0;
+    var realIndexEnd = 0;
+    for (var w in widgets) {
+        var _widget = widgets[w];
+        if (_widget.pageId === pageId) {
+            if(count === Number(start)){
+                realIndexStart = w;
+            }else if(count === Number(end)){
+                realIndexEnd = w;
+            }
+            count++;
+        }
+    }
+
+    Array.prototype.move = function (from, to) {
+        this.splice(to, 0, this.splice(from, 1)[0]);
+    };
+    widgets.move(realIndexStart,realIndexEnd);
+    return;
+}
 
 function deleteWidget(req, res) {
     var widgetId = req.params.widgetId;
@@ -122,3 +156,19 @@ function createWidget(req, res) {
     widgets.push(widget);
     return res.send(widget);
 }
+
+var cloneObj = function(obj){
+    var str, newobj = obj.constructor === Array ? [] : {};
+    if(typeof obj !== 'object'){
+        return;
+    } else if(window.JSON){
+        str = JSON.stringify(obj),
+            newobj = JSON.parse(str);
+    } else {
+        for(var i in obj){
+            newobj[i] = typeof obj[i] === 'object' ?
+                cloneObj(obj[i]) : obj[i];
+        }
+    }
+    return newobj;
+};
