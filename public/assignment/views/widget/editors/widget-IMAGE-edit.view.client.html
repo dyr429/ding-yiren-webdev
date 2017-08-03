@@ -1,5 +1,5 @@
 <div class="container">
-    <form class="form-titled form-horizontal">
+    <div class="form-titled form-horizontal">
         <h5>Id</h5>
         <input type="text" class="form-control input-block"
                ng-model="model.thiswidget._id"
@@ -20,9 +20,22 @@
                   placeholder="url"
                   ng-model="model.thiswidget.url">
             </textarea>
+
+        <h5>Upload</h5>
+        <form action="/api/upload"   method="post" enctype="multipart/form-data" class="form-upload">
+            <input  name="myFile"    type="file" class="form-control"/>
+            <input  name="width"     value="{{model.thiswidget.width}}" style="display: none"/>
+            <input  name="userId"    value="{{model.userId}}"   style="display: none"/>
+            <input  name="websiteId" value="{{model.websiteId}}"   style="display: none"/>
+            <input  name="pageId"    value="{{model.pageId}}"   style="display: none"/>
+            <input  name="widgetId"  value="{{model.widgetId}}"   style="display: none"/>
+            <button type="submit"    class="btn btn-block btn-primary" id="upload-btn">Upload Image</button>
+        </form>
+
+
         <a class="btn btn-danger btn-block"
            href=""
            role="button"
            ng-click="model.deleteWidget()">Delete</a>
-    </form>
+    </div>
 </div>
