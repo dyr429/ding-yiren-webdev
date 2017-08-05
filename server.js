@@ -11,6 +11,7 @@ app.use(express.static(__dirname + '/public'));
 
 require("./test/app");
 require("./assignment/app");
+require("./project/app");
 
 port = process.env.PORT || 3000;
 app.listen(port);
