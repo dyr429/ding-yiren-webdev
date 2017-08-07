@@ -13,6 +13,7 @@
             searchService.searchSong(song)
                 .then(function (response) {
                     model.search = response.data.songList;
+                    model.song = model.search[0];
                     for(var u in model.search) {
                         // console.log(model.search[u].name);
                     }

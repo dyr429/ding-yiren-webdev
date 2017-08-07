@@ -50,7 +50,7 @@ body {
 }
 
 .header-nightsky .navbar-nav {
-   margin-top: 12px;
+    margin-top: 12px;
 }
 
 .header-nightsky .navbar-toggle {
@@ -131,6 +131,18 @@ body {
     transform:translateY(1px);
 }
 
+.search-table.container-fluid{
+    padding-top: 40px;
+
+}
+
+.list-group-item{
+    background: transparent;
+    border-collapse: collapse;
+    border-color: transparent;
+}
+
+
 @media screen and (max-width: 767px) {
 
     .header-nightsky .navbar-default .navbar-nav .open .dropdown-menu>li>a{
@@ -156,4 +168,5 @@ body {
     .header-nightsky .hero h1{
         font-size: 42px;
     }
+
 }
