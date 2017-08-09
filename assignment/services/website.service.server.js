@@ -1,4 +1,5 @@
 var app = require('../../express');
+var websiteModel = require('../model/website/website.model.server');
 var websites = [
         { "_id": "123", "name": "Facebook",    "developerId": "456", "description": "Lorem" },
         { "_id": "234", "name": "Tweeter",     "developerId": "456", "description": "Lorem" },
@@ -32,43 +33,41 @@ function deleteWebsite(req,res) {
 }
 
 function updateWebsite(req,res) {
-    var websiteId = req.params.websiteId;
-    var website = req.body;
-    for(var w in websites){
-        if(websites[w]._id === websiteId){
-            websites[w] = website;
-            return res.send(website);
-        }
-    }
-    res.sendStatus(404);
+    var _websiteId = req.params.websiteId;
+    var _website = req.body;
+    websiteModel
+        .updateWebsite(_websiteId,_website)
+        .then(function (status) {
+            res.send(status);
+        });
 }
 function findWebsiteById(req, res) {
-    var websiteId = req.params.websiteId;
-    for(var w in websites){
-        var _website = websites[w];
-        if(_website._id === websiteId){
-            return res.send(_website);
-        }
-    }
-    res.sendStatus(404);
+    var _websiteId = req.params.websiteId;
+    websiteModel
+        .findWebsiteById(_websiteId)
+        .then(function (website) {
+            res.json(website);
+        }, function (err){
+            res.send(err);
+        });
 }
 
 function findAllWebsitesForUser(req,res){
-    var userId = req.params.userId;
-    var result = [];
-    for(var w in websites){
-        var _website = websites[w];
-        if(_website.developerId === userId){
-            result.push(_website);
-        }
-    }
-    return res.send(result);
+    var _userId = req.params.userId;
+    websiteModel
+        .findAllWebsitesForUser(_userId)
+        .then(function (websites) {
+            res.json(websites);
+        });
+
 }
 
 function createWebsite(req,res) {
     var website = req.body;
-    website._id = (new Date()).getTime() + ""
-    website.developerId = req.params.userId;
-    websites.push(website);
-    return res.send(website);
+    var userid = req.params.userId;
+    websiteModel
+        .createWebsite(website,userid)
+        .then(function (website) {
+            res.json(website);
+        });
 }

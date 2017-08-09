@@ -15,19 +15,19 @@
                 userService.findUserByCredentials(user.username)
                     .then(function (response) {
                         var responseuser = response.data;
-                        if (responseuser === "0") {
+                        if (!responseuser) {
                             return userService.createUser(user);
                         } else {
                             model.errorMessage = "username already exist";
+                            return "exist";
                         }
-                        return "err";
                     })
                     .then(function(response){
-                        if(response != "err"){
+                        if(response && response!="exist"){
                             user = response.data;
                             $location.url("/user/" + user._id);
                         }
-                        else{
+                        else if(response!="exist"){
                             model.errorMessage = "something goes wrong";
                         }
 

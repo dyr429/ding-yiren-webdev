@@ -12,10 +12,10 @@
 <div class="container-fluid">
     <ul class="list-group white-list item-row">
         <li ng-repeat="page in model.pages" class="list-group-item">
-            <a href="#!/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}/widget">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget">
                 <h3>{{page.name}}</h3>
             </a>
-            <a href="#!/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}">
                 <span class="glyphicon glyphicon-cog icon-right"></span>
             </a>
         </li>

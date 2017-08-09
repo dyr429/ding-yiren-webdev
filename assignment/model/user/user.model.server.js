@@ -9,7 +9,6 @@ userModel.findUserByUsername = findUserByUsername;
 userModel.findUserByCredentials = findUserByCredentials;
 userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
-userModel.findUserByFacebookId =findUserByFacebookId;
 
 userModel.addWebsite = addWebsite;
 userModel.deleteWebsite = deleteWebsite;
@@ -17,28 +16,11 @@ userModel.deleteWebsite = deleteWebsite;
 module.exports = userModel;
 
 
-function deleteWebsite(userId, websiteId) {
-    return userModel
-        .findById(userId)
-        .then(function (user) {
-            var index = user.websites.indexOf(websiteId);
-            user.websites.splice(index, 1);
-            return user.save();
-        });
-}
-
-function addWebsite(userId, websiteId) {
-    return userModel
-        .findById(userId)
-        .then(function (user) {
-            user.websites.push(websiteId);
-            return user.save();
-        });
-}
-
+//functions
 function createUser(user) {
     return userModel.create(user);
 }
+
 
 function findUserById(userId) {
     return userModel.findById(userId);
@@ -64,4 +46,23 @@ function updateUser(userId, newUser) {
 
 function deleteUser(userId) {
     return userModel.remove({_id: userId});
+}
+
+function deleteWebsite(userId, websiteId) {
+    return userModel
+        .findUserById(userId)
+        .then(function (user) {
+            var index = user.websites.indexOf(websiteId);
+            user.websites.splice(index, 1);
+            return user.save();
+        });
+}
+
+function addWebsite(userId, websiteId) {
+    return userModel
+        .findUserById(userId)
+        .then(function (user) {
+            user.websites.push(websiteId);
+            return user.save();
+        });
 }

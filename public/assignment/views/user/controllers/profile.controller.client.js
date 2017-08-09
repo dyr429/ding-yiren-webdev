@@ -33,8 +33,6 @@
                     alert("update scceuss")
                 }
             });
-
-     //       $location.url("user/" + user._id);
         }
 
         function unregister(){
