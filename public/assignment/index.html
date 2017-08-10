@@ -2,9 +2,13 @@
 <html lang="en" ng-app="WebAppMaker">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--text angular-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.16/textAngular.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!--my css -->
     <link rel="stylesheet" href="css/styles.css">
     <!-- jQuery library -->
@@ -18,16 +22,22 @@
     <!--angular-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.js"></script>
+    <!--text angular-->
+    <script src='https://cdn.jsdelivr.net/angular.textangular/1.5.16/textAngular-rangy.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/angular.textangular/1.5.16/textAngular-sanitize.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/angular.textangular/1.5.16/textAngular.min.js'></script>
     <!--my script-->
     <script src="js/app.js"></script>
     <script src="js/config.js"></script>
     <script src="js/utilities.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
     <script src="directives/wbdv-sortable.js"></script>
     <!--services-->
     <script src="services/user.service.client.js"></script>
     <script src="services/website.service.client.js"></script>
     <script src="services/page.service.client.js"></script>
     <script src="services/widget.service.client.js"></script>
+    <script src="services/flickr.service.client.js"></script>
     <!--controllers-->
     <script src="views/user/controllers/login.controller.client.js"></script>
     <script src="views/user/controllers/profile.controller.client.js"></script>
@@ -41,6 +51,7 @@
     <script src="views/widget/controllers/widget-list.controller.client.js"></script>
     <script src="views/widget/controllers/widget-edit.controller.client.js"></script>
     <script src="views/widget/controllers/widget-new.controller.client.js"></script>
+    <script src="views/widget/controllers/widget-flickr-search.controller.client.js"></script>
     <script src="views/home/home.controller.client.js"></script>
 
     <title>Index</title>

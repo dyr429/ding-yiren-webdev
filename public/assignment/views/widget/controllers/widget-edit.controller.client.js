@@ -54,10 +54,12 @@
                 });
         }
         function getWidgetEdit(){
-            var url = "views/widget/editors/widget-"
-            url += model.thiswidget.widgetType;
-            url += "-edit.view.client.html"
-            return url;
+            if(model.thiswidget){
+                var url = "views/widget/editors/widget-"
+                url += model.thiswidget.type;
+                url += "-edit.view.client.html"
+                return url;
+             }
         }
 
     }

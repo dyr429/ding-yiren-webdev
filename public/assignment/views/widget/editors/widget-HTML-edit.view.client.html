@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container full-height">
     <form class="form-titled form-horizontal">
         <h5>Id</h5>
         <input type="text" class="form-control input-block"
@@ -6,15 +6,24 @@
                readonly/>
         <h5>Type</h5>
         <input type="text" class="form-control input-block"
-               ng-model="model.thiswidget.widgetType"
+               ng-model="model.thiswidget.type"
                readonly/>
 
         <h5>Text</h5>
-        <textarea rows="5"
-                  class="form-control input-block"
-                  placeholder="text"
-                  ng-model="model.thiswidget.text">
-            </textarea>
+        <div text-angular ng-model="model.thiswidget.text"></div>
+        <!--<div ng-model="model.thiswidget.text"-->
+             <!--text-angular-->
+             <!--ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],-->
+        <!--['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],-->
+        <!--['indent','outdent'],['html']]">-->
+        <!--</div>-->
+
+
+        <!--<textarea rows="5"-->
+                  <!--class="form-control input-block"-->
+                  <!--placeholder="text"-->
+                  <!--ng-model="model.thiswidget.text">-->
+            <!--</textarea>-->
         <a class="btn btn-danger btn-block"
            href=""
            role="button"

@@ -15,17 +15,16 @@ app.delete("/api/page/:pageId", deletePage);
 
 
 function deletePage(req,res) {
-    var pageId = req.params.pageId;
-    for(var p in pages){
-        if(pages[p]._id === pageId){
-            if(p > -1){
-                var deleted = pages[p];
-                pages.splice(p,1);
-            }
-            return res.send(deleted);
-        }
-    }
-    res.sendStatus(404);
+    var _pageId = req.params.pageId;
+    pageModel.findPageById(_pageId)
+        .then(function (page) {
+            var _websiteId = page._website.toString();
+            pageModel.deletePage(_websiteId, _pageId)
+                .then(function (status) {
+                    res.send(status);
+                })
+
+        })
 }
 
 function updatePage(req,res) {

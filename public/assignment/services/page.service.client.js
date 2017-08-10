@@ -4,9 +4,6 @@
         .module("WebAppMaker")
         .factory("pageService", pageService);
     function pageService($http) {
-
-
-
         var api = {
             "createPage"   : createPage,
             "findPageByWebsiteId" : findPageByWebsiteId,

@@ -1,0 +1,19 @@
+<div class="widget-block">
+    <div class="gadget">
+        <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+            <span class="glyphicon glyphicon-cog blueicon"></span>
+        </a>
+        <span class="glyphicon glyphicon-align-justify"></span>
+    </div>
+
+
+    <div ng-if="widget.formatted" text-angular ng-model="widget.text"></div>
+
+    <input ng-if="!widget.formatted && (!widget.rows || widget.rows===1)"
+           placeholder="{{widget.placeholder}}" value="{{widget.text}}" class="form-control"/>
+
+    <textarea ng-if="!widget.formatted && (widget.rows > 1)"
+              rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+              class="form-control">{{widget.text}}</textarea>
+
+</div>

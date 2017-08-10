@@ -19,17 +19,16 @@ app.delete("/api/website/:websiteId", deleteWebsite);
 
 
 function deleteWebsite(req,res) {
-    var websiteId = req.params.websiteId;
-    for(var w in websites){
-        if(websites[w]._id === websiteId){
-            var deleted = websites[w];
-            if(w > -1){
-                websites.splice(w,1);
-            }
-            return res.send(deleted);
-        }
-    }
-    res.sendStatus(404);
+    var _websiteId = req.params.websiteId;
+    websiteModel.findWebsiteById(_websiteId)
+        .then(function (website) {
+            var _userId = website._user.toString();
+            websiteModel.deleteWebsite(_websiteId, _userId)
+                .then(function (status) {
+                    res.send(status);
+                })
+
+        })
 }
 
 function updateWebsite(req,res) {

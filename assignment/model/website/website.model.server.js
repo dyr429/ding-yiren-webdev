@@ -41,8 +41,13 @@ function findAllWebsitesForUser(userId) {
         .exec();
 }
 
-function deleteWebsite(websiteId) {
-    return websiteModel.remove({_id: websiteId});
+function deleteWebsite(websiteId,userId) {
+    return websiteModel
+        .remove({_id: websiteId})
+        .then(function (status) {
+            return userModel
+                .deleteWebsite(userId, websiteId);
+        });
 }
 
 function deletePage(websiteId, pageId) {
