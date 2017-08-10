@@ -47,7 +47,7 @@
                 .then(function (response) {
                     var deletewebsite = response.data;
                     if(deletewebsite != "0"){
-                        alert("update scceuss");
+                        alert("delete scceuss");
                     }
                 });
 

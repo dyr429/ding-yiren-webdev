@@ -47,7 +47,8 @@
         function deletePage(){
             pageService.deletePage(model.pageId)
                 .then(function (response) {
-                    if(response.data != "0"){
+                    var deletepage = response.data;
+                    if(deletepage != "0"){
                         alert("delete success")
                         $location.url("user/" +model.userId + "/website/" + model.websiteId + "/page");
                     }else{

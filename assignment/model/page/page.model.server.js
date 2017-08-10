@@ -48,7 +48,7 @@ function deletePage(websiteId,pageId) {
         .remove({_id: pageId})
         .then(function (status) {
             return websiteModel
-                .deleteWebsite(websiteId, pageId);
+                .deletePage(websiteId, pageId);
         });
 }
 
