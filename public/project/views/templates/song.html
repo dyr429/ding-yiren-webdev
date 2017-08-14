@@ -1,0 +1,63 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#!/">Musiker</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="#">Home</a></li>
+                <li><a href="#!/play">PLAY</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#!/user/{{model.userId}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                <li><a href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="search">
+    <h1>MUSIKER</h1>
+    <h4>search songs and add to your collection</h4>
+    <div class="searchbar">
+        <input placeholder="Shape of You"
+               ng-model = "model.searchContent"
+               class="form-control"/>
+        <button ng-click="model.searchSong(model.searchContent)" class="btn btn-primary">
+            Search Song
+        </button>
+    </div>
+    <div ng-show="model.searchresult">
+        <h2>Search Result:</h2>
+        <ul class="list-group item-row">
+            <li ng-repeat="song in model.searchresult" class="list-group-item content-list">
+                <h4>song Id: {{song._id}}</h4>
+                <h4>file name: {{song.name}}</h4>
+                <button ng-click="'model.addToList()'"
+                        class="btn btn-info btn-block">
+                    Add
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <h2>Upload Song</h2>
+        <form action="/projectapi/upload" id = "upload" method="post" enctype="multipart/form-data">
+            <input  name="myFile"    type="file" class="form-control"/>
+            <input  name="userId"    value="{{model.userId}}"   style="display: none"/>
+            <button type="submit"    class="btn btn-block btn-success">Upload Song</button>
+        </form>
+    </div>
+
+    <h1>Your Favourite song List</h1>
+    <ul class="list-group item-row">
+        <li ng-repeat="song in model.mysongs" class="list-group-item content-list">
+            <a href="/projectapi/music?id={{song._id}}">{{song.name}}</h5></a>
+        </li>
+    </ul>
+</div>

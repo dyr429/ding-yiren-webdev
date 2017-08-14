@@ -1,0 +1,27 @@
+<div ng-include="'views/templates/header.html'"></div>
+<div class="container">
+    <div class="mainhead">
+        <h1>Login</h1>
+    </div>
+    <div>
+        <form class="form-horizontal">
+            <input type="text"
+                   class="form-control input-block"
+                   placeholder="username"
+                   ng-model="model.user.username">
+            <input type="password"
+                   class="form-control input-block"
+                   placeholder="password"
+                   ng-model="model.user.password">
+            <a class="btn btn-primary btn-block"
+               ng-click="model.login(model.user)"
+               role="button">Login</a>
+            <a class="btn btn-success btn-block"
+               href="#!/register"
+               role="button">Register</a>
+            <div ng-show="model.errorMessage" class="alert alert-danger">
+                <h3 class="error-title">{{model.errorMessage}}</h3>
+            </div>
+        </form>
+    </div>
+</div>
