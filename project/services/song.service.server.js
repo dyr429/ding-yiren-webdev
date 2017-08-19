@@ -1,5 +1,6 @@
 var app = require("../../express");
 var songModel = require("../model/song.model.server");
+var userModel = require("../model/user.model.server");
 var multer = require('multer'); // npm install multer --save
 var upload = multer({dest: __dirname + '/../../public/uploads'});
 var fs = require('fs');
@@ -7,19 +8,40 @@ var fs = require('fs');
 app.post("/projectapi/user/:userId/song", createSongForUser);
 app.get("/projectapi/song", findSongBySongName);
 app.get("/projectapi/user/:userId/song", findAllSongsByUser);
-app.get("/projectapi/song/:songId", findSongById);
+app.get("/projectapi/search/song/:songId", findSongById);
 app.put("/projectapi/song/:songId", updateSong);
 app.post("/projectapi/upload", upload.single('myFile'), uploadSong);
-app.delete("/projectapi/song/:songId", deleteSong);
+app.delete("/projectapi/user/:userId/song/:songId", deleteSong);
+app.get("/projectapi/songs", findAllSongs);
+app.get("/projectapi/song/:songId/creator", getSongCreator);
+app.put("/projectapi/song/:songId/owner/:ownerId/price/:priceNum", addSongOwner);
+app.post("/projectapi/song/api", createSongFromApi);
+app.get("/projectapi/review/song/:songId", findSongByIdWithReview);
+app.put("/projectapi/song/:songId/playlist/:playlistId", addPlaylistToSong);
+
+function findSongByIdWithReview(req, res) {
+    var songId = req.params.songId;
+    songModel.findSongByIdWithReview(songId)
+        .then(function (songs) {
+            res.json(songs);
+        }, function (err) {
+            res.sendStatus(500).send(err);;
+        })
+}
 
 function uploadSong(req, res) {
 
     var myFile = req.file;
 
     var userId = req.body.userId;
-    console.log("gagag");
-    console.log(userId);
+    var cover = req.body.cover;
+    var songName = req.body.songName;
     var originalname = myFile.originalname; // file name on user's computer
+    var index = originalname.indexOf(".");
+    originalname = originalname.substring(0, index);
+    if(songName === "") {
+        songName = originalname;
+    }
     var filename = myFile.filename;     // new file name in upload folder
     var path = myFile.path;         // full path of uploaded file
     var destination = myFile.destination;  // folder where file is saved to
@@ -27,22 +49,22 @@ function uploadSong(req, res) {
     var mimetype = myFile.mimetype;
 
     var song= { "url":'/public/uploads/' + filename,
-                "name": originalname
+                "name": songName,
+                "_creator" : userId,
+                "cover" : cover,
     };
 
-    songModel.createSongForUser(userId,song)
+    userModel.createSongForUser(userId,song)
         .then(function () {
-            var callbackUrl = "/project/#!/user/" + userId;
+            var callbackUrl = "/project/#!/home";
             res.redirect(callbackUrl);
         })
 }
 
-
-
 function createSongForUser(req,res) {
     var song = req.body;
     var userId = req.params.userId;
-    songModel
+    userModel
         .createSongForUser(userId, song)
         .then(function (song) {
             res.json(song);
@@ -78,6 +100,7 @@ function findSongBySongName(req, res) {
 
 function findAllSongsByUser(req, res) {
     var userId = req.params.userId;
+    console.log(userId);
     songModel
         .findAllSongsByUser(userId)
         .then(function (songs) {
@@ -101,11 +124,82 @@ function updateSong(req, res){
 
 function deleteSong(req, res) {
     var songId = req.params.songId;
-    songModel
-        .deleteSongById(songId)
+    var userId = req.params.userId;
+    songModel.findSongById(songId)
         .then(function (song) {
-            res.send("1");
+            var filePath = __dirname + '/../../'
+            filePath += song.url;
+            fs.unlinkSync(filePath);
+            console.log('successfully deleted ');
+        })
+    userModel
+        .deleteSong(userId, songId)
+        .then(function (song) {
+            res.json(song);
         }, function (err) {
-            res.send("0");
+            res.sendStatus(500).send(err);
         });
+}
+
+function findAllSongs(req, res) {
+    return songModel.findAllSongs()
+        .then(function (songs) {
+            res.json(songs);
+        }, function (err) {
+            res.sendStatus(500).send(err);
+        })
+}
+
+function getSongCreator(req,res) {
+    var songId = req.params.songId;
+    return songModel
+        .getSongCreator(songId)
+        .then(function (creator) {
+            res.json(creator);
+        }, function (err) {
+            res.sendStatus(500).send(err);
+        })
+}
+
+
+function addSongOwner(req, res) {
+    var songId = req.params.songId;
+    var ownerId = req.params.ownerId;
+    var priceNum = req.params.priceNum;
+    return songModel.findSongById(songId)
+        .then(function (song) {
+            song._owner = ownerId;
+            song.price = priceNum;
+            return songModel.updateSong(song._id, song);
+        })
+        .then(function (songDoc) {
+            res.json(songDoc);
+        })
+}
+
+function addPlaylistToSong(req,res) {
+    var songId = req.params.songId;
+    var playlistId = req.params.playlistId;
+    return songModel
+        .addPlaylistToSong(playlistId,songId)
+        .then(function (song) {
+            res.json(song);
+        });
+}
+
+function createSongFromApi(req, res) {
+    var song = req.body;
+    songModel
+        .findOne({thridPartyId: song.thridPartyId})
+        .then(
+            function (user) {
+                if (user) {//.length !== 0
+                    res.json(user);
+                } else {
+                    songModel.createSongFromApi(song)
+                        .then(function (songTmp) {
+                            res.json(songTmp);
+                        })
+                }
+            })
 }

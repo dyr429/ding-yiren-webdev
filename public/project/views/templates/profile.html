@@ -6,20 +6,28 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#!/">Musiker</a>
+            <a class="navbar-brand" href="#!/home">Musiker</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li><a href="#">Home</a></li>
-                <li><a href="#!/play">PLAY</a></li>
+
+                <li><a href="#!/home">Home</a></li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#!/user/{{model.userId}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-                <li><a href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+                <li><a href="#!/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+
             </ul>
         </div>
     </div>
 </nav>
+<div class="user-detail-div container-fluid">
+    <div class="user-detail-header-div">
+        <div class="user-detail-header-img-div">
+            <img class="user-photo-large" ng-src="{{model.user.avatar}}">
+        </div>
+    </div>
+</div>
 <div class="container full-height">
     <form class="form-titled form-horizontal">
         <h5>Username</h5>
@@ -45,26 +53,25 @@
                class="form-control input-block"
                placeholder="last name"
                ng-model="model.user.lastName">
-        <a class="btn btn-primary btn-block"
-           role="button"
-           href="#!/user/{{model.user._id}}/song">Songs</a>
-        <a class="btn btn-success btn-block"
-           role="button"
-           href="#!/user/{{model.user._id}}/song">Upload Song</a>
-        <a class="btn btn-primary btn-block"
-           role="button"
-           href="#!/user/{{model.user._id}}/follow">Follow List</a>
-        <a class="btn btn-primary btn-block"
-           role="button"
-           id="passbtn"
-           href=""
-           ng-click="model.showPassword()">Show Password</a>
-        <a class="btn btn-primary btn-block"
-           role="button"
-           ng-click="model.updateUser(model.user)">Update Profile</a>
-        <a class="btn btn-danger btn-block"
-           role="button"
-           ng-click="model.unregister()">Unregister</a>
-        <a class="btn btn-danger btn-block" href="#!/login" role="button">Log Out</a>
     </form>
+    <div class="upload">
+        <h5>Upload Avatar</h5>
+        <form action="/projectapi/avatar" id = "upload" method="post" enctype="multipart/form-data">
+            <input  name="avatar" type="file" class="form-control"/>
+            <input  name="userId" value="{{model.user._id}}"   style="display: none"/>
+            <button type="submit" class="btn btn-block btn-success">Upload</button>
+        </form>
+    </div>
+    <a class="btn btn-primary btn-block"
+       role="button"
+       id="passbtn"
+       href=""
+       ng-click="model.showPassword()">Show Password</a>
+    <a class="btn btn-primary btn-block"
+       role="button"
+       ng-click="model.updateUser(model.user)">Update Profile</a>
+    <a class="btn btn-danger btn-block"
+       role="button"
+       ng-click="model.unregister()">Unregister</a>
+    <a class="btn btn-danger btn-block" href="#!/" role="button">Log Out</a>
 </div>

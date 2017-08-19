@@ -3,15 +3,16 @@
         .module("Musiker")
         .controller("profileController", profileController);
 
-    function profileController($routeParams,$location, userService) {
+    function profileController($location, userService, user) {
         //declare controller
         var model = this;
         //variable from path
-        model.userId = $routeParams["uid"];
+        model.userId = user._id;
         //declare function
         model.updateUser = updateUser;
         model.unregister = unregister;
         model.showPassword = showPassword;
+
 
         //initial function
         function init() {
@@ -36,7 +37,7 @@
 
         function unregister(){
             userService.deleteUser(model.userId);
-            $location.url("/login");
+            $location.url("/");
         }
 
         function showPassword() {
@@ -51,7 +52,6 @@
             }
 
         }
-
 
 
     }
