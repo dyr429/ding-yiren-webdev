@@ -14,6 +14,7 @@
         model.unregister = unregister;
         model.showPassword = showPassword;
         model.defaultMessage = defaultMessage;
+        model.logout = logout;
 
 
         //initial function
@@ -81,6 +82,14 @@
 
         }
 
+        function logout() {
+            userService
+                .logout()
+                .then(
+                    function(response) {
+                        $location.url("/");
+                    });
+        }
 
     }
 })();

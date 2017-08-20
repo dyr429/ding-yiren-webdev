@@ -10,6 +10,7 @@
         model.findMusicianInfo = findMusicianInfo;
         model.findMusicianSongs = findMusicianSongs;
         model.followMusician = followMusician;
+        model.logout = logout;
         function init() {
             findMusicianSongs();
             findMusicianInfo();
@@ -44,6 +45,15 @@
             else{
                 alert("cannot follow yourself");
             }
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(
+                    function(response) {
+                        $location.url("/");
+                    });
         }
     }
 })();

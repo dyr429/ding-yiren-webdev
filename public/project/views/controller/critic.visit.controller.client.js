@@ -10,6 +10,7 @@
         model.findCriticInfo = findCriticInfo;
         model.findCriticReviews = findCriticReviews;
         model.followCritic = followCritic;
+        model.logout = logout;
         function init() {
             findCriticReviews();
             findCriticInfo();
@@ -44,6 +45,15 @@
             else {
                 alert("cannot follow yourself");
             }
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(
+                    function(response) {
+                        $location.url("/");
+                    });
         }
     }
 })();
