@@ -343,6 +343,7 @@ label.musician-detail-label {
     font-size: 20px !important;
     color: mediumaquamarine !important;
     display:inline-block;
+    word-break: break-all;
 }
 
 .transaction-operator-combination {
