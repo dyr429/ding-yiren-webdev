@@ -3,7 +3,7 @@
         .module("Musiker")
         .controller("criticVisitController", criticVisitController);
 
-    function criticVisitController(userService, reviewService, $routeParams, user) {
+    function criticVisitController(userService, reviewService, $routeParams, $location,user) {
         var model = this;
         model.user = user;
         var criticId = $routeParams["criticId"];

@@ -3,7 +3,7 @@
         .module("Musiker")
         .controller("musicianVisitController", musicianVisitController);
 
-    function musicianVisitController(userService, songService, $routeParams, user) {
+    function musicianVisitController(userService, songService, $routeParams, $location,user) {
         var model = this;
         model.user = user;
         var musicianId = $routeParams["musicianId"];
